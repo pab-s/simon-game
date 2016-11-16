@@ -82,10 +82,9 @@ var randomPlay = function() {
 }
 
 
-function delayedFunc(func) {
-  setTimeout(func, 1000);
+function delayedFunc(func, time) {
+  setTimeout(func, time);
 }
-
 
 
 var computerPlay = function (number) {
@@ -93,21 +92,22 @@ var computerPlay = function (number) {
 }
 
 var computerTurn = function() {
-
+  updateTurns();
   for (var i = 0; i < gamePlays.length; i++) {
       setTimeout(function(x) { return function() {
         computerPlay(gamePlays[x]);
+        if(x === gamePlays.length - 1) {
+          delayedFunc(randomPlay, 1000);
+        }
       }; }(i), 1000*i);
   }
-  //randomPlay();
-  updateTurns();
 }
 
 var logHumanPlay = function(color) {
   if(humanMoveRecord === gamePlays.length) {
     gamePlays.push(colorArray.indexOf(color));
     updateTurns();
-    delayedFunc(computerTurn);
+    delayedFunc(computerTurn, 1500);
     humanMoveRecord = 0;
   } else {
     humanMoveRecord++
