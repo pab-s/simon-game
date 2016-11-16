@@ -17,32 +17,29 @@ var humanMoveRecord = 0;
 
 countScreen[0].innerHTML = turns;
 
-
 //audio
 var audio1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var audio2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var audio3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var audio4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
-// start.addEventListener("click", function() {
-// });
+var btnEvent = function() {
+    playAudio(this);
+    logHumanPlay(this);
+    addActiveClass(this);
+}
+var startBtnEvent = function() {
+  green.addEventListener("mousedown", btnEvent);
+  red.addEventListener("mousedown", btnEvent);
+  blue.addEventListener("mousedown", btnEvent);
+  yellow.addEventListener("mousedown", btnEvent);
+}
 
-green.addEventListener("mousedown", function() {
-  playAudio(this);
-  logHumanPlay(this);
+start.addEventListener("click", function() {
+  startBtnEvent();
 });
-red.addEventListener("mousedown", function() {
-  playAudio(this);
-  logHumanPlay(this);
-});
-blue.addEventListener("mousedown", function() {
-  playAudio(this);
-  logHumanPlay(this);
-});
-yellow.addEventListener("mousedown", function() {
-  playAudio(this);
-  logHumanPlay(this);
-});
+
+green.disabled = true;
 
 var playAudio = function(color) {
     switch(color) {
@@ -66,13 +63,15 @@ var updateTurns = function() {
   countScreen[0].innerHTML = turns;
 //  console.log(gamePlays);
 };
-
-var computerPushButton = function(color) {
-  playAudio(color);
+var addActiveClass = function(color) {
   color.classList.add("active");
   setTimeout(function() {
      color.classList.remove("active");
   }, 500);
+}
+var computerPushButton = function(color) {
+  playAudio(color);
+  addActiveClass(color);
 }
 
 var randomPlay = function() {
@@ -85,7 +84,6 @@ var randomPlay = function() {
 function delayedFunc(func, time) {
   setTimeout(func, time);
 }
-
 
 var computerPlay = function (number) {
   computerPushButton(colorArray[number]);

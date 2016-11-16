@@ -110,10 +110,6 @@ body{
   border-radius: 0px 0px 0px 100%;
   float: left;
 }
-
-.simon div:active{
-  opacity: 1;
-}
 .active {
   opacity: 1;
 }
