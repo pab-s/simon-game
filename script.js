@@ -13,6 +13,7 @@ var countScreen = document.getElementsByClassName("count");
 var colorArray = [green, red, blue, yellow];
 var gamePlays = [];
 var turns = 0;
+var humanMoveRecord = 0;
 
 countScreen[0].innerHTML = turns;
 
@@ -63,7 +64,7 @@ var playAudio = function(color) {
 var updateTurns = function() {
   turns++;
   countScreen[0].innerHTML = turns;
-  console.log(gamePlays);
+//  console.log(gamePlays);
 };
 
 var computerPushButton = function(color) {
@@ -80,25 +81,35 @@ var randomPlay = function() {
   computerPlay(randomNum);
 }
 
-var timeout;
+
 function delayedFunc(func) {
-  timeout = window.setTimeout(func, 1000);
+  setTimeout(func, 1000);
 }
+
+
 
 var computerPlay = function (number) {
   computerPushButton(colorArray[number]);
 }
 
 var computerTurn = function() {
+
   for (var i = 0; i < gamePlays.length; i++) {
-    computerPlay(gamePlays[i]);
+      setTimeout(function(x) { return function() {
+        computerPlay(gamePlays[x]);
+      }; }(i), 1000*i);
   }
-  delayedFunc(randomPlay);
+  //randomPlay();
   updateTurns();
 }
 
 var logHumanPlay = function(color) {
-  gamePlays.push(colorArray.indexOf(color));
-  updateTurns();
-  delayedFunc(computerTurn);
+  if(humanMoveRecord === gamePlays.length) {
+    gamePlays.push(colorArray.indexOf(color));
+    updateTurns();
+    delayedFunc(computerTurn);
+    humanMoveRecord = 0;
+  } else {
+    humanMoveRecord++
+  }
 };
