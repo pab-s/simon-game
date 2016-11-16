@@ -76,6 +76,7 @@ var computerPushButton = function(color) {
 
 var randomPlay = function() {
   var randomNum = Math.floor(Math.random() * 4);
+  gamePlays.push(randomNum);
   computerPlay(randomNum);
 }
 
@@ -85,15 +86,14 @@ function delayedFunc(func) {
 }
 
 var computerPlay = function (number) {
-  gamePlays.push(number);
   computerPushButton(colorArray[number]);
 }
 
 var computerTurn = function() {
-  // for (var i = 0; i < gamePlays.length; i++) {
-  //   computerPlay(gamePlays[i]);
-  // }
-  randomPlay();
+  for (var i = 0; i < gamePlays.length; i++) {
+    computerPlay(gamePlays[i]);
+  }
+  delayedFunc(randomPlay);
   updateTurns();
 }
 
