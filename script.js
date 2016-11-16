@@ -20,7 +20,8 @@ var audio2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var audio3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var audio4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
-
+// start.addEventListener("click", function() {
+// });
 
 green.addEventListener("mousedown", function() {
   playAudio(this);
@@ -39,26 +40,6 @@ yellow.addEventListener("mousedown", function() {
   logHumanPlay(this);
 });
 
-var updateTurns = function() {
-  turns++;
-  countScreen[0].innerHTML = turns;
-};
-
-var logHumanPlay = function(color) {
-  gamePlays.push(colorArray.indexOf(color));
-  updateTurns();
-  console.log("turns " + turns);
-  console.log(gamePlays);
-};
-
-var computerPlay = function(color) {
-  playAudio(color);
-  color.classList.add("active");
-  setTimeout(function() {
-     color.classList.remove("active");
-  }, 500);
-}
-
 var playAudio = function(color) {
     switch(color) {
       case green:
@@ -76,20 +57,41 @@ var playAudio = function(color) {
     }
 }
 
+var updateTurns = function() {
+  turns++;
+  countScreen[0].innerHTML = turns;
+  console.log(gamePlays);
+};
 
-var randomPlay = function () {
-  var randomNum = Math.floor(Math.random() * 4);
-  gamePlays.push(randomNum);
-  updateTurns();
-  computerPlay(colorArray[randomNum]);
+var computerPushButton = function(color) {
+  playAudio(color);
+  color.classList.add("active");
+  setTimeout(function() {
+     color.classList.remove("active");
+  }, 500);
 }
+
+var randomPlay = function() {
+  var randomNum = Math.floor(Math.random() * 4);
+  computerPlay(randomNum);
+}
+
+var timeout;
+var computerPlay = function (number) {
+      timeout = window.setTimeout(function() {
+      gamePlays.push(number);
+      computerPushButton(colorArray[number]);
+      updateTurns();
+  }, 1000);
+
+}
+
+var logHumanPlay = function(color) {
+  gamePlays.push(colorArray.indexOf(color));
+  updateTurns();
+  computerTurn();
+};
 
 var computerTurn = function() {
   randomPlay();
-  console.log("turns " + turns);
-  console.log(gamePlays);
 }
-
-start.addEventListener("click", function() {
-  computerTurn();
-});
