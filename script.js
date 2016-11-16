@@ -14,6 +14,9 @@ var colorArray = [green, red, blue, yellow];
 var gamePlays = [];
 var turns = 0;
 
+countScreen[0].innerHTML = turns;
+
+
 //audio
 var audio1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var audio2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
@@ -77,21 +80,25 @@ var randomPlay = function() {
 }
 
 var timeout;
-var computerPlay = function (number) {
-      timeout = window.setTimeout(function() {
-      gamePlays.push(number);
-      computerPushButton(colorArray[number]);
-      updateTurns();
-  }, 1000);
+function delayedFunc(func) {
+  timeout = window.setTimeout(func, 1000);
+}
 
+var computerPlay = function (number) {
+  gamePlays.push(number);
+  computerPushButton(colorArray[number]);
+}
+
+var computerTurn = function() {
+  // for (var i = 0; i < gamePlays.length; i++) {
+  //   computerPlay(gamePlays[i]);
+  // }
+  randomPlay();
+  updateTurns();
 }
 
 var logHumanPlay = function(color) {
   gamePlays.push(colorArray.indexOf(color));
   updateTurns();
-  computerTurn();
+  delayedFunc(computerTurn);
 };
-
-var computerTurn = function() {
-  randomPlay();
-}
