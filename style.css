@@ -59,8 +59,15 @@ body{
   margin: 20px;
   box-shadow: 3px 3px 10px black;
 }
+.btn:hover{
+  background: #C6E2FF;
+}
 .btn:active{
   box-shadow: none;
+}
+.btn-pushed {
+  box-shadow: none;
+  background: #C6E2FF;
 }
 .btn-txt {
   position: absolute;

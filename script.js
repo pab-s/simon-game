@@ -36,8 +36,13 @@ var startBtnEvent = function() {
 }
 
 start.addEventListener("click", function() {
+  addPushedClass(this);
   startBtnEvent();
 });
+
+var addPushedClass = function(btn) {
+  btn.classList.add("btn-pushed");
+}
 
 green.disabled = true;
 
