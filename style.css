@@ -72,12 +72,12 @@ body{
 .btn-txt {
   position: absolute;
   top: 60px;
-  left: 0px;
+  left: 4px;
 }
 .btn-txt span{
   font-family: 'Helvetica';
-  font-size: 16px;
-  margin: 16px;
+  font-size: 14px;
+  margin: 20px;
   color: grey;
 }
 .green {

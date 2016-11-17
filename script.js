@@ -4,8 +4,8 @@ var blue = document.getElementById("blue-btn");
 var red = document.getElementById("red-btn");
 var yellow = document.getElementById("yellow-btn");
 
-var on = document.getElementById("on");
 var start = document.getElementById("start");
+var off = document.getElementById("off");
 var strict = document.getElementById("strict");
 var countScreen = document.getElementsByClassName("count");
 
@@ -15,8 +15,7 @@ var gamePlays = [];
 var turns = 0;
 var humanMoveRecord = 0;
 var userWrong = false;
-
-//countScreen[0].innerHTML = turns;
+var useStrict = false;
 
 //audio
 var audio1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
