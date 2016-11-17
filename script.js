@@ -23,22 +23,17 @@ var audio2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var audio3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var audio4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
-var btnEvent = function() {
+var btnColorEvent = function() {
     playAudio(this);
     logHumanPlay(this);
     addActiveClass(this);
 }
 var startBtnEvent = function() {
-  green.addEventListener("mousedown", btnEvent);
-  red.addEventListener("mousedown", btnEvent);
-  blue.addEventListener("mousedown", btnEvent);
-  yellow.addEventListener("mousedown", btnEvent);
+  green.addEventListener("mousedown", btnColorEvent);
+  red.addEventListener("mousedown", btnColorEvent);
+  blue.addEventListener("mousedown", btnColorEvent);
+  yellow.addEventListener("mousedown", btnColorEvent);
 }
-
-start.addEventListener("click", function() {
-  addPushedClass(this);
-  startBtnEvent();
-});
 
 var addPushedClass = function(btn) {
   btn.classList.add("btn-pushed");
@@ -63,11 +58,6 @@ var playAudio = function(color) {
     }
 }
 
-var updateTurns = function() {
-  turns++;
-  countScreen[0].innerHTML = turns;
-//  console.log(gamePlays);
-};
 var addActiveClass = function(color) {
   color.classList.add("active");
   setTimeout(function() {
@@ -78,13 +68,17 @@ var computerPushButton = function(color) {
   playAudio(color);
   addActiveClass(color);
 }
-
+var updateTurns = function() {
+  turns++;
+  countScreen[0].innerHTML = turns;
+//  console.log(gamePlays);
+};
 var randomPlay = function() {
   var randomNum = Math.floor(Math.random() * 4);
   gamePlays.push(randomNum);
+  updateTurns();
   computerPlay(randomNum);
 }
-
 
 function delayedFunc(func, time) {
   setTimeout(func, time);
@@ -95,7 +89,7 @@ var computerPlay = function (number) {
 }
 
 var computerTurn = function() {
-  updateTurns();
+  console.log(gamePlays.length);
   for (var i = 0; i < gamePlays.length; i++) {
       setTimeout(function(x) { return function() {
         computerPlay(gamePlays[x]);
@@ -107,12 +101,17 @@ var computerTurn = function() {
 }
 
 var logHumanPlay = function(color) {
+  humanMoveRecord++
   if(humanMoveRecord === gamePlays.length) {
-    gamePlays.push(colorArray.indexOf(color));
-    updateTurns();
-    delayedFunc(computerTurn, 1500);
+  //  gamePlays.push(colorArray.indexOf(color));
     humanMoveRecord = 0;
-  } else {
-    humanMoveRecord++
+    delayedFunc(computerTurn, 2000);
+
   }
 };
+
+start.addEventListener("click", function() {
+  addPushedClass(this);
+  delayedFunc(randomPlay, 1000);
+  startBtnEvent();
+});
