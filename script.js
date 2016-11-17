@@ -14,8 +14,9 @@ var colorArray = [green, red, blue, yellow];
 var gamePlays = [];
 var turns = 0;
 var humanMoveRecord = 0;
+var userWrong = false;
 
-countScreen[0].innerHTML = turns;
+//countScreen[0].innerHTML = turns;
 
 //audio
 var audio1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
@@ -38,8 +39,6 @@ var startBtnEvent = function() {
 var addPushedClass = function(btn) {
   btn.classList.add("btn-pushed");
 }
-
-green.disabled = true;
 
 var playAudio = function(color) {
     switch(color) {
@@ -88,10 +87,11 @@ var computerPlay = function (number) {
 }
 
 var computerTurn = function() {
+  countScreen[0].innerHTML = turns;// updates screen turns
   for (var i = 0; i < gamePlays.length; i++) {
       setTimeout(function(x) { return function() {
         computerPlay(gamePlays[x]);
-        if(x === gamePlays.length - 1) {
+        if(x === gamePlays.length - 1 && userWrong === false) {
           delayedFunc(randomPlay, 1000);
         }
       }; }(i), 1000*i);
@@ -102,11 +102,18 @@ var logHumanPlay = function(color) {
 
   if(gamePlays[humanMoveRecord] === colorArray.indexOf(color)) {
     humanMoveRecord++
+    console.log(humanMoveRecord);
+    console.log(gamePlays.length);
   } else {
     console.log("wrong!");
+    countScreen[0].innerHTML = "x";
+    userWrong = true;// computer has to replay but no randomPlay
+    humanMoveRecord = 0;
+    delayedFunc(computerTurn, 2000);
   }
   if(humanMoveRecord === gamePlays.length) {
     humanMoveRecord = 0;
+    userWrong = false;
     delayedFunc(computerTurn, 2000);
   }
 };
