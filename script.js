@@ -5,7 +5,7 @@ var red = document.getElementById("red-btn");
 var yellow = document.getElementById("yellow-btn");
 
 var start = document.getElementById("start");
-var off = document.getElementById("off");
+var stop = document.getElementById("stop");
 var strict = document.getElementById("strict");
 var countScreen = document.getElementsByClassName("count");
 
@@ -34,9 +34,15 @@ var startBtnEvent = function() {
   blue.addEventListener("mousedown", btnColorEvent);
   yellow.addEventListener("mousedown", btnColorEvent);
 }
+// I need a function that removes all those event listener
 
 var addPushedClass = function(btn) {
   btn.classList.add("btn-pushed");
+}
+var removeAllPushedClass = function(btn) {
+  start.classList.remove("btn-pushed");
+  stop.classList.remove("btn-pushed");
+  strict.classList.remove("btn-pushed");
 }
 
 var playAudio = function(color) {
@@ -62,13 +68,17 @@ var addActiveClass = function(color) {
      color.classList.remove("active");
   }, 500);
 }
+
 var computerPushButton = function(color) {
   playAudio(color);
   addActiveClass(color);
 }
+var logScreen = function(input) {
+  countScreen[0].innerHTML = input;
+}
 var updateTurns = function() {
-  turns++;
-  countScreen[0].innerHTML = turns;
+  turns++
+  logScreen(turns);
 };
 var randomPlay = function() {
   var randomNum = Math.floor(Math.random() * 4);
@@ -104,8 +114,7 @@ var logHumanPlay = function(color) {
     console.log(humanMoveRecord);
     console.log(gamePlays.length);
   } else {
-    console.log("wrong!");
-    countScreen[0].innerHTML = "x";
+    logScreen("X"); //wrong move!
     userWrong = true;// computer has to replay but no randomPlay
     humanMoveRecord = 0;
     delayedFunc(computerTurn, 2000);
@@ -121,4 +130,9 @@ start.addEventListener("click", function() {
   addPushedClass(this);
   delayedFunc(randomPlay, 1000);
   startBtnEvent();
+});
+stop.addEventListener("click", function() {
+  removeAllPushedClass();
+  logScreen("");
+  gamePlays = [];
 });
