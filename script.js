@@ -71,7 +71,6 @@ var computerPushButton = function(color) {
 var updateTurns = function() {
   turns++;
   countScreen[0].innerHTML = turns;
-//  console.log(gamePlays);
 };
 var randomPlay = function() {
   var randomNum = Math.floor(Math.random() * 4);
@@ -89,7 +88,6 @@ var computerPlay = function (number) {
 }
 
 var computerTurn = function() {
-  console.log(gamePlays.length);
   for (var i = 0; i < gamePlays.length; i++) {
       setTimeout(function(x) { return function() {
         computerPlay(gamePlays[x]);
@@ -101,12 +99,15 @@ var computerTurn = function() {
 }
 
 var logHumanPlay = function(color) {
-  humanMoveRecord++
+
+  if(gamePlays[humanMoveRecord] === colorArray.indexOf(color)) {
+    humanMoveRecord++
+  } else {
+    console.log("wrong!");
+  }
   if(humanMoveRecord === gamePlays.length) {
-  //  gamePlays.push(colorArray.indexOf(color));
     humanMoveRecord = 0;
     delayedFunc(computerTurn, 2000);
-
   }
 };
 
