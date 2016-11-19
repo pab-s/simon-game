@@ -142,6 +142,10 @@ stop.addEventListener("click", function() {
   gamePlays = [];
 });
 strict.addEventListener("click", function() {
-  addPushedClass(this);
-  useStrict = true;
+  useStrict = !useStrict;
+  if(useStrict === true) {
+    addPushedClass(this);
+  } else {
+    strict.classList.remove("btn-pushed");
+  }
 });
