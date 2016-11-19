@@ -111,8 +111,13 @@ var logHumanPlay = function(color) {
 
   if(gamePlays[humanMoveRecord] === colorArray.indexOf(color)) {
     humanMoveRecord++
-    console.log(humanMoveRecord);
-    console.log(gamePlays.length);
+  } else if(useStrict === true) {
+    logScreen("X");
+    gamePlays = [];
+    turns = 0;
+    humanMoveRecord = 0;
+    delayedFunc(randomPlay, 1000);
+    return;
   } else {
     logScreen("X"); //wrong move!
     userWrong = true;// computer has to replay but no randomPlay
@@ -135,4 +140,8 @@ stop.addEventListener("click", function() {
   removeAllPushedClass();
   logScreen("");
   gamePlays = [];
+});
+strict.addEventListener("click", function() {
+  addPushedClass(this);
+  useStrict = true;
 });
