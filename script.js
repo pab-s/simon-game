@@ -22,6 +22,8 @@ var audio1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var audio2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var audio3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var audio4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+//var audioWrong = new Audio('http://www.wavsource.com/snds_2016-10-30_1570758759693582/sfx/buzzer_x.wav');
+var audioWrong = new Audio('http://www.wavsource.com/snds_2016-10-30_1570758759693582/sfx/boing_x.wav');
 
 var btnColorEvent = function() {
     playAudio(this);
@@ -119,6 +121,7 @@ var logHumanPlay = function(color) {
     humanMoveRecord++
   } else if(useStrict === true) {
     logScreen("X");
+    audioWrong.play();
     gamePlays = [];
     turns = 0;
     humanMoveRecord = 0;
@@ -126,6 +129,7 @@ var logHumanPlay = function(color) {
     return;
   } else {
     logScreen("X"); //wrong move!
+    audioWrong.play();
     userWrong = true;// computer has to replay but no randomPlay
     humanMoveRecord = 0;
     delayedFunc(computerTurn, 2000);
