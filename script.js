@@ -34,7 +34,13 @@ var startBtnEvent = function() {
   blue.addEventListener("mousedown", btnColorEvent);
   yellow.addEventListener("mousedown", btnColorEvent);
 }
-// I need a function that removes all those event listener
+// removes all event listener
+var removeBtnEvent = function() {
+  green.removeEventListener("mousedown", btnColorEvent);
+  red.removeEventListener("mousedown", btnColorEvent);
+  blue.removeEventListener("mousedown", btnColorEvent);
+  yellow.removeEventListener("mousedown", btnColorEvent);
+}
 
 var addPushedClass = function(btn) {
   btn.classList.add("btn-pushed");
@@ -116,7 +122,7 @@ var logHumanPlay = function(color) {
     gamePlays = [];
     turns = 0;
     humanMoveRecord = 0;
-    delayedFunc(randomPlay, 1000);
+    delayedFunc(randomPlay, 1500);
     return;
   } else {
     logScreen("X"); //wrong move!
@@ -138,7 +144,10 @@ start.addEventListener("click", function() {
 });
 stop.addEventListener("click", function() {
   removeAllPushedClass();
+  removeBtnEvent();
   logScreen("");
+  turns = 0;
+  humanMoveRecord = 0;
   gamePlays = [];
 });
 strict.addEventListener("click", function() {
