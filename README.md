@@ -1,25 +1,15 @@
-# simon-game
+# Simon Game
+
+> Vanilla JavaScript Simon App. 
+
+<img src="pablo_jurado_simon_game.png" alt="pablo jurado simon game">
+
+Each time you input a series of button presses correctly, you see the same series of button presses but with an additional step.
+If you press the wrong button you will hear a buzz, and that series of button presses starts again to remind you of the pattern so you can try again. If you want to restart, hit the button and the game will return to a single step.
+
+In strict mode, if you press the wrong button the game restarts at a new random series of button presses.
+Finally you can win the game by getting a series of 20 steps correct
 
 
-Objective: Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/obYBjE.
-
-Rule #1: Don't look at the example project's code. Figure it out for yourself.
-
-Rule #2: Fulfill the below user stories. Use whichever libraries or APIs you need. Give it your own personal style.
-
-User Story: I am presented with a random series of button presses.
-
-User Story: Each time I input a series of button presses correctly, I see the same series of button presses but with an additional step.
-
-User Story: I hear a sound that corresponds to each button both when the series of button presses plays, and when I personally press a button.
-
-User Story: If I press the wrong button, I am notified that I have done so, and that series of button presses starts again to remind me of the pattern so I can try again.
-
-User Story: I can see how many steps are in the current series of button presses.
-
-User Story: If I want to restart, I can hit a button to do so, and the game will return to a single step.
-
-User Story: I can play in strict mode where if I get a button press wrong, it notifies me that I have done so, and the game restarts at a new random series of button presses.
-
-User Story: I can win the game by getting a series of 20 steps correct. I am notified of my victory, then the game starts over.
-
+## Credits
+[Pablo Jurado](https://github.com/pablo-jurado)
